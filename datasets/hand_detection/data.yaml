@@ -1,0 +1,5 @@
+names:
+  0: hand
+path: C:\Users\USER\Desktop\ASL_Detection\datasets\hand_detection
+train: images/train
+val: images/val
