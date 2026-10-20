@@ -15,8 +15,11 @@ while True:
     
     results = model.predict(frame, conf=0.5, verbose=False)
     
-    for x1,y1,x2,y2 in results[0].boxes.xyxy.int().tolist():
+    boxes=results[0].boxes
+    for (x1,y1,x2,y2),conf in zip(boxes.xyxy.int().tolist(),boxes.conf.tolist()):
         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(frame,f"{conf:.2f}",(x1,y1-8),
+        cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,255,0),2)
         
     cv2.imshow("Hand Dectection",frame)
     if cv2.waitKey(1) & 0XFF==ord("q"):
